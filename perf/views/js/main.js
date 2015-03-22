@@ -277,14 +277,18 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-	  // Moved it outside the loop because each pizza size is the same.
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[0], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[0].offsetWidth + dx) + 'px';
-	  console.log(newwidth);
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-//      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-//      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+	// Assigned a variable to document.querySelectorAll call &
+	// used it to retrieve the specific element in array &
+	// its length
+	var randomPizzaContainer = document.querySelectorAll(".randomPizzaContainer");
+	var randomPizzaContainerLength = randomPizzaContainer.length;
+
+	// Moved it outside the loop because each pizza size is the same.
+	var dx = determineDx(randomPizzaContainer[0], size);
+	var newwidth = (randomPizzaContainer[0].offsetWidth + dx) + 'px';
+
+    for (var i = 0; i < randomPizzaContainerLength; i++) {
+      randomPizzaContainer[i].style.width = newwidth;
     }
   }
 
@@ -334,8 +338,13 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+
+  // Assigned a variable to get Visible Window's top position &
+  // then divided by 1250 as was in original code.
+
+  var visibleWindowTopPosition = (document.body.scrollTop / 1250);
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin(visibleWindowTopPosition + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 

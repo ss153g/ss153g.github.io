@@ -9,7 +9,9 @@ Performed the following optimization
 5. Reduced the image size using a program
 --
 6. Pizza page - moved 2 calculations outside of changePizzaSizes function. This made the change from 400 ms to 10ms
+6a. Assigned a variable to document.queryselectorall call and used it for accessing each element in its array.
 7. Pizza page - combined the 2 switch function into 1.
 8. Minified CSS files
 9. Minified JS files (original is also included)
 10. Moved the minified file reference to the bottom of the page
+11. Assigned a variable to document.scrolltop so that it is not called in everytime in the loop.
